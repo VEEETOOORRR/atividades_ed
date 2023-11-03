@@ -18,8 +18,8 @@ typedef struct lista{
 void cria(ListaAluno *la);
 int tamanho(ListaAluno *la);
 int vazia(ListaAluno *la);
-int buscaPosMat(ListaAluno *la, int mat, int *pos);
-int buscaAlunoPos(ListaAluno *la, int pos, Aluno al);
+int buscaPosMat(ListaAluno *la, int mat);
+int buscaAlunoPos(ListaAluno *la, int pos);
 int insereFinal(ListaAluno *la, Aluno al);
 int removeAlunoMat(ListaAluno *la, int mat);
 void exibirALunos(ListaAluno *la);

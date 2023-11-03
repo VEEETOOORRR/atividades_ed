@@ -9,7 +9,7 @@ void cria(Lista *l){
 int vazia(Lista *l){
   if (l->inicio == NULL)
     return 1;
-  return 0;
+  return 0; 
 }
 
 int tamanho(Lista *l){
