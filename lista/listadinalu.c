@@ -38,21 +38,21 @@ int buscaPosMat(ListaAluno *la, int mat){
   return -1;
 }
 
-int buscaAlunoPos(ListaAluno *la, int pos){
-  No *aux = la->inicio;
-  int i = 0;
-  while (aux!=NULL || i < pos){
-
-    i++;
-    aux=aux->prox;
-  }
-  if(i == pos){
-    
-    for(int j=0;aux->dado.nome[j] != '\0';j++){
-    printf("%c",aux->dado.nome[j]);
-  }
-  return -1;
-}
+int buscaAlunoPos(ListaAluno *la, int pos) {
+    No *aux = la->inicio;
+    int i = 0;
+    while (aux != NULL || i < pos) {
+        i++;
+        aux = aux->prox;
+    }
+    if (i == pos) {
+        printf("Matrícula: %d\n", aux->dado.matricula);
+        printf("Nome: %s\n", aux->dado.nome);
+        printf("Nota 1: %.2f\n", aux->dado.nota1);
+        printf("Nota 2: %.2f\n", aux->dado.nota2);
+        return 1;
+    }
+    return -1;
 }
 
 int insereFinal(ListaAluno *la, Aluno al){
@@ -103,9 +103,11 @@ int removeAlunoMat(ListaAluno *la, int mat){
     
 }
 
-int exibirAlunos(ListaAluno *la) {
+
+void exibirALunos(ListaAluno *la){
+
     No *atual = la->inicio;
-    while (atual != NULL) {
+    while (atual->prox != NULL) {
         printf("Matrícula: %d\n", atual->dado.matricula);
         printf("Nome: %s\n", atual->dado.nome);
         printf("Nota 1: %.2f\n", atual->dado.nota1);
