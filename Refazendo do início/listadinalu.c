@@ -171,3 +171,18 @@ int insereOrdemMat(ListaAluno *la, Aluno al){
         }
     }
 }
+
+int removeAlunoPos(ListaAluno *la, int pos){
+    No *aux = la->inicio;
+    int mat;
+    for(int i=0;i<pos;i++){
+        aux = aux->prox;
+    }
+    mat = aux->dado.matricula;
+    int remocao = removeAlunoMat(la,mat);
+
+    return remocao;
+
+}
+
+int pesquisarAluno(ListaAluno *la)

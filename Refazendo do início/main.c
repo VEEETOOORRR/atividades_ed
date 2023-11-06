@@ -81,6 +81,14 @@ int prompt(ListaAluno *la){
         else{
             printf("\n A matrícula %d está na posição %d.", matricula, posi);
             enter();
+        }
+    }
+
+    if(opcao == 4){ //esse código abaixo é da ultima operação que falta ser programada..
+        char nome[30];
+        printf("\nDigite o nome a ser pesquisado: ");
+        fgets(nome, sizeof(nome), stdin);
+        buscapos = buscaAlunoPos(ListaAluno *la, int pos, Aluno *al);
     }
 
     if(opcao == 8){
