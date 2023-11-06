@@ -1,26 +1,34 @@
 #include "listadinalu.c"
 
+void enter() {
+    printf("\nPressione Enter para continuar...");
+    while (getchar() != '\n'); // Limpa o buffer de entrada.
+    getchar(); // Aguarda a entrada do usuário.
+}
+
 Aluno *cadastra(){
-    Aluno *novo = (Aluno*) malloc(sizeof(Aluno));
-    if (novo == NULL){
-        return 0;
+    Aluno *novoAluno = (Aluno*) malloc(sizeof(Aluno));
+    if (novoAluno == NULL){
+        return NULL; // Retorna NULL em caso de erro na alocação.
     }
     printf("\nDigite a matrícula: ");
-    scanf("%d",&novo->matricula);
+    scanf("%d", &novoAluno->matricula);
 
-    getchar();
+    while (getchar() != '\n'); // Limpa o buffer de entrada.
 
     printf("\nDigite o nome: ");
-    fgets(novo->nome, sizeof(novo->nome), stdin);
-    novo->nome[strcspn(novo->nome, "\n")] = 0;
+    fgets(novoAluno->nome, sizeof(novoAluno->nome), stdin);
+    novoAluno->nome[strcspn(novoAluno->nome, "\n")] = 0;
 
     printf("\nDigite a primeira nota: ");
-    scanf("%d",&novo->nota1);
+    scanf("%d", &novoAluno->nota1);
+
+    while (getchar() != '\n'); // Limpa o buffer de entrada.
 
     printf("\nDigite a segunda nota: ");
-    scanf("%d",&novo->nota2);
+    scanf("%d", &novoAluno->nota2);
 
-    return novo;
+    return novoAluno;
 }
 
 int prompt(ListaAluno *la){
@@ -33,6 +41,7 @@ int prompt(ListaAluno *la){
     printf("\n5- Inserir aluno no final da lista");
     printf("\n6- Remover aluno da lista pela sua matrícula");
     printf("\n7- Exibir alunos cadastrados na lista");
+    printf("\n8- Cadastrar aluno em ordem de matrícula");
     printf("\nOpção escolhida: ");
     int opcao;
 
@@ -40,15 +49,46 @@ int prompt(ListaAluno *la){
 
     if(opcao == 1){
 
-        printf("\nA lista possui %d elementos",tamanho(la));
-        printf("\n Pressione ENTER para voltar ");
+        printf("\nA lista possui %d elementos",tamanho(la));        
+        enter();
 
-        char enter = 0;
-        while (enter != '\r' && enter != '\n') { enter = getchar(); }
         return 1;
-
-    return 0;
 }
+
+    if(opcao == 2){
+        int tavazia = vazia(la);
+        if(tavazia == 1){
+            printf("A lista está vazia");
+        }
+        else if(tavazia == 0){
+            printf("A lista não está vazia");
+        }
+        enter();
+        return 1;
+    }
+    
+    if(opcao == 3){
+        int matricula;
+        printf("\nDigite a matrícula a ser procurada: ");
+        scanf("%d",&matricula);
+
+        int posi = buscaPosMat(la,matricula);
+        
+        if(posi == -1){
+            printf("\nA matrícula %d não está cadastrada na lista.", matricula);
+            enter();
+        }
+        else{
+            printf("\n A matrícula %d está na posição %d.", matricula, posi);
+            enter();
+    }
+
+    if(opcao == 8){
+        int i = insereOrdemMat(la,*cadastra());
+        return i;
+        enter();
+    }
+    return 0;
 }
 
 int main(){

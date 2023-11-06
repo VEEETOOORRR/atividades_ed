@@ -127,3 +127,47 @@ int inserePos(ListaAluno *la, Aluno al, int pos){
 
     return 1;
 }
+
+int insereOrdemMat(ListaAluno *la, Aluno al){
+    No *novo = (No*) malloc(sizeof(No));
+    if (novo == NULL){
+        return 0;
+    }
+
+    novo->dado = al;
+    int menorMat = 2147483000; // Inicialize com um valor grande.
+    int matNovo = al.matricula;
+    int pos = 0;
+    int posMat = 0;
+    No *aux = la->inicio;
+
+    while (aux != NULL) {
+        if (menorMat > aux->dado.matricula) {
+            menorMat = aux->dado.matricula;
+            posMat = pos;
+        }
+
+        if (matNovo == aux->dado.matricula) {
+            free(novo); // Libere o novo nó em caso de matrícula duplicada.
+            return -1;
+        }
+        aux = aux->prox;
+        pos++;
+    }
+
+    if (menorMat > matNovo) {
+        int j = inserePos(la, al, posMat);
+        if (j == 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    } else {
+        int j = inserePos(la, al, posMat - 1);
+        if (j == 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
