@@ -25,3 +25,8 @@ int buscaAlunoPos(ListaAluno *la, int pos, Aluno *al);
 int insereFinal(ListaAluno *la, Aluno al);
 int removeAlunoMat(ListaAluno *la, int mat);
 void exibirAlunos(ListaAluno *la);
+
+int inserePos(ListaAluno *la, Aluno al, int pos);
+int insereOrdemMat(ListaAluno *la, Aluno al);
+int removeAlunoPos(ListaAluno *la, int pos);
+int pesquisarAlunoOuMat(ListaAluno *la);

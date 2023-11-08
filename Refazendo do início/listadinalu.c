@@ -32,17 +32,22 @@ int buscaPosMat(ListaAluno *la, int mat){
 }
 
 int buscaAlunoPos(ListaAluno *la, int pos, Aluno *al){
+
+    if(vazia(la)==1){
+        return -1;
+    }
     No *aux = la->inicio;
     for(int i = 0; i < pos; i++){
         aux = aux->prox;
         if (aux == NULL){
             return -1;
         }
-        strcpy(al->nome, aux->dado.nome);
-        al->matricula = aux->dado.matricula;
-        al->nota1 = aux->dado.nota1;
-        al->nota2 = aux->dado.nota2;
+
     }
+    strcpy(al->nome, aux->dado.nome);
+    al->matricula = aux->dado.matricula;
+    al->nota1 = aux->dado.nota1;
+    al->nota2 = aux->dado.nota2;
     return 1;
 }
 
@@ -185,4 +190,59 @@ int removeAlunoPos(ListaAluno *la, int pos){
 
 }
 
-int pesquisarAluno(ListaAluno *la)
+int pesquisarAlunoOuMat(ListaAluno *la){
+    int opcao;
+    int contador = 0;
+
+    printf("\nDigite 1 para pesquisar pelo nome");
+    printf("\nDigite 2 para pesquisar pela matrícula");
+    printf("\nOpção escolhida: ");
+    scanf("%d",&opcao);
+
+    if(opcao == 1){
+        char nomeP[30];
+        printf("\nDigite o nome a ser pesquisado: ");
+        scanf("%s",nomeP);
+       
+
+        No *aux = la->inicio;
+        while(aux != NULL){
+            if (strcmp(nomeP,aux->dado.nome) == 0){
+                printf("\nMatrícula: %d",aux->dado.matricula);
+                printf("\nNome: %s",aux->dado.nome);
+                printf("\nNota 1: %d",aux->dado.nota1);
+                printf("\nNota 2: %d",aux->dado.nota2);
+                contador++;
+            }
+            aux = aux->prox;
+        }
+
+    }
+
+    if(opcao == 2){
+        int matricula;
+        printf("Digite a matrícula a ser pesquisada: ");
+        scanf("%d",&matricula);
+        No *aux = la->inicio;
+        while(aux != NULL){
+            if (aux->dado.matricula == matricula){
+                printf("\nMatrícula: %d",aux->dado.matricula);
+                printf("\nNome: %s",aux->dado.nome);
+                printf("\nNota 1: %d",aux->dado.nota1);
+                printf("\nNota 2: %d",aux->dado.nota2);
+                contador++;
+            }
+            aux = aux->prox;
+        }
+
+
+    }
+
+    if(contador > 0){
+        return 1;
+    }
+
+    else{
+        return 0;
+    }
+}
