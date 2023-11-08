@@ -74,31 +74,22 @@ int insereFinal(ListaAluno *la, Aluno al){
 }
 
 int removeAlunoMat(ListaAluno *la, int mat){
-    if (vazia(la) == 1) {
-        return 0; // Lista está vazia, não há nada para remover.
+    if(vazia(la) == 1){
+        return 0;
     }
 
     int posicao = buscaPosMat(la, mat);
-    if (posicao == -1) {
-        return 0; // Matrícula não encontrada na lista.
+    if (posicao == -1){
+        return 0;
     }
-
-    if (posicao == 0) {
-        // Remoção do primeiro elemento da lista
-        No *temp = la->inicio;
-        la->inicio = la->inicio->prox;
-        free(temp);
-    } else {
-        No *aux = la->inicio;
-        for (int i = 0; i < posicao - 1; i++) {
-            aux = aux->prox;
-        }
-        No *temp = aux->prox;
-        aux->prox = aux->prox->prox;
-        free(temp);
+    No *aux = la->inicio;
+    for (int i = 0; i < posicao - 1; i++){
+        aux = aux->prox;
     }
-
-    return 1; // Remoção bem-sucedida.
+    No *temp = aux->prox;
+    aux->prox = aux->prox->prox;
+    free(temp);
+    return 1;
 }
 
 void exibirAlunos(ListaAluno *la){

@@ -108,7 +108,6 @@ int prompt(ListaAluno *la){
             printf("\nA matrícula %d está na posição %d.", matricula, posi);
         }
         enter();
-        return 1;
     }
 
 
