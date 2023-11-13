@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "fila.h"
 
 void criar(Fila *f){
@@ -16,25 +15,25 @@ int tamanho(Fila *f){
    return f->tamanho;
 }
 
-char *primeiro(Fila *f){
+int primeiro(Fila *f){
   if (!vazia(f))
-    return f->inicio->cliente;
-  return NULL;
+    return f->inicio->pac;
+  return -1;
 }
 
-char *ultimo(Fila *f){
+Paciente ultimo(Fila *f){
   if (!vazia(f))
-    return f->fim->cliente;
-  return NULL;
+    return f->fim->pac;
+  return -1;
 }
 
-int entrar(Fila *f, char *nome){
+int entrar(Fila *f, int elem){
   No* novo = (No*) malloc(sizeof(No));
 
   if (novo == NULL)
     return 0;
   
-  strcpy(novo->cliente, nome);
+  novo->dado = elem;
   novo->prox = NULL;
 
   //1o caso: Fila vazia
@@ -52,12 +51,12 @@ int entrar(Fila *f, char *nome){
   
 }
 
-char *sair(Fila *f){
+int sair(Fila *f){
   if(vazia(f))
-    return NULL;
+    return 0;
 
   No* temp = f->inicio;
-  char *retorno = f->inicio->cliente;
+  int retorno = f->inicio->dado;
   f->inicio = f->inicio->prox;
   free(temp);
   f->tamanho--;
@@ -69,7 +68,7 @@ void exibir(Fila *f) {
   No *aux;
   printf("[ ");
   for (aux = f->inicio; aux != NULL; aux = aux->prox) {
-    printf("%s ", aux->cliente);
+    printf("%d ", aux->dado);
   }
   printf("]");
 

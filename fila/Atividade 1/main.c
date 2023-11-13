@@ -35,7 +35,7 @@ int prompt(Fila *pe, Fila *pa, Fila *en){
   if(opcao == 'b'){
     char temp[30];
     strcpy(temp,pe->inicio->cliente);
-    if(remove(&pe)==1){
+    if(sair(pe)!=NULL){
 
       if(entrar(pa,temp)==1){
         printf("\nCliente removido da Fila de Pedidos com sucesso!");
@@ -53,7 +53,7 @@ int prompt(Fila *pe, Fila *pa, Fila *en){
   if(opcao == 'c'){
     char temp[30];
     strcpy(temp,pa->inicio->cliente);
-    if(remove(&pa)==1){
+    if(sair(pa)!=NULL){
 
       if(entrar(en,temp)==1){
         printf("\nCliente removido da Fila de Pedidos com sucesso!");
@@ -69,19 +69,11 @@ int prompt(Fila *pe, Fila *pa, Fila *en){
   }
 
   if(opcao == 'd'){
-    char temp[30];
-    strcpy(temp,pa->inicio->cliente);
-    if(remove(&pa)==1){
-
-      if(entrar(en,temp)==1){
-        printf("\nCliente removido da Fila de Pedidos com sucesso!");
-      }
-      else{
-        printf("\nErro ao remanejar cliente para a Fila de Pagamentos.");
-      }
+    if(sair(en)!=NULL){
+      printf("Cliente removido com sucesso!");
     }
     else{
-      printf("\nErro ao remover cliente da Fila de Pedidos.");
+      printf("Erro ao remover cliente.");
     }
 
   }
@@ -109,7 +101,7 @@ int main(){
 
   int i = prompt(&pedido, &pagamento, &encomenda);
   while(i == 1){
-    int i = prompt(&pedido, &pagamento, &encomenda);
+    i = prompt(&pedido, &pagamento, &encomenda);
   }
 
   return 0;
