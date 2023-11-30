@@ -25,6 +25,7 @@ int empilhar(PilhaEnc *p, int dado){
     } 
 
     novo->prox = p->topo;
+    novo->dado = dado;
     p->topo = novo;
     return 1;
 }
@@ -64,12 +65,17 @@ int invertePilha(PilhaEnc *p){
     }
     
     PilhaEnc inversora;
+    
     criarPilha(&inversora);
 
-    for(No *aux = p->topo;aux !=NULL;aux = aux->prox){
-        empilhar(&inversora, aux->dado);
+    int dado;
+    while (pilhaVazia(*p) != 1) {
+        desempilhar(p, &dado);
+        empilhar(&inversora, dado);
     }
-    p = &inversora;
+
+    *p = inversora;
+
     return 1;
 
 }
@@ -88,25 +94,20 @@ int esvaziar(PilhaEnc *p){
 }
 
 
-int mudaPilha(PilhaEnc *p, PilhaEnc *p1, PilhaEnc *p2, PilhaEnc *p3){
+int mudaPilha(PilhaEnc **p, PilhaEnc *p1, PilhaEnc *p2, PilhaEnc *p3) {
     int opcao;
     printf("\nDigite qual das três pilhas queres manipular: ");
     scanf("%d", &opcao);
 
-    if(opcao==1){
-        p = p1;
-    }
-    
-    else if(opcao==2){
-        p = p2;
-    }
-
-    else if(opcao==3){
-        p = p3;
+    if (opcao == 1) {
+        *p = p1;
+    } else if (opcao == 2) {
+        *p = p2;
+    } else if (opcao == 3) {
+        *p = p3;
+    } else {
+        return 0; // Opção inválida
     }
 
-    else{
-        return 0;
-    }
     return 1;
 }

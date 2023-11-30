@@ -6,9 +6,9 @@ void enter() {
     getchar(); // Aguarda a entrada do usuário.
 }
 
-int menu(PilhaEnc p1,PilhaEnc p2,PilhaEnc p3,PilhaEnc *p){
+int menu(PilhaEnc *p){
     int opcao;
-    p = &p1;
+    //p = &p1;
     printf("\nEditor de Pilha v1.0");
     printf("\n====================");
     printf("\n1- Inicializar");
@@ -18,7 +18,7 @@ int menu(PilhaEnc p1,PilhaEnc p2,PilhaEnc p3,PilhaEnc *p){
     printf("\n5- Imprimir pilha");
     printf("\n6- Inverter elementos da pilha");
     printf("\n7- Esvaziar a pilha");
-    printf("\n8- Mudar de pilha");
+    //printf("\n8- Mudar de pilha");
     printf("\n\nDigite sua opção: ");
     scanf("%d",&opcao);
 
@@ -66,7 +66,7 @@ int menu(PilhaEnc p1,PilhaEnc p2,PilhaEnc p3,PilhaEnc *p){
     }
 
     if(opcao==6){
-        if(invertePilha(&p)==1){
+        if(invertePilha(p)==1){
             printf("\nPilha invertida com sucesso!");
         }
         else{
@@ -80,7 +80,7 @@ int menu(PilhaEnc p1,PilhaEnc p2,PilhaEnc p3,PilhaEnc *p){
         scanf("%d",&confirma);
 
         if(confirma==1){
-            if(esvaziar(&p)==1){
+            if(esvaziar(p)==1){
                 printf("\nPilha esvaziada com sucesso!");
             }
             else{
@@ -92,14 +92,14 @@ int menu(PilhaEnc p1,PilhaEnc p2,PilhaEnc p3,PilhaEnc *p){
         }
     }
 
-    if(opcao==8){
+    /*if(opcao==8){
         if(mudaPilha(p,&p1,&p2,&p3)==1){
             printf("\nPilha trocada com sucesso!");
         }
         else{
             printf("\nOpção inválida!");
         }
-    }
+    }*/
 
     if(opcao==0){
         return 0;
@@ -113,12 +113,14 @@ int menu(PilhaEnc p1,PilhaEnc p2,PilhaEnc p3,PilhaEnc *p){
 }
 
 int main(){
-    PilhaEnc pilha1, pilha2, pilha3, *p;
-    criarPilha(&p);
+    PilhaEnc pteste;
+    PilhaEnc *pilhaE = &pteste;
+    
+    //criarPilha(&pilhaE);
 
-    int i = menu(pilha1, pilha2, pilha3, p);
+    int i = menu(pilhaE);
     while(i == 1){
-        i = menu(pilha1, pilha2, pilha3, p);
+        i = menu(pilhaE);
     }
 
     return 0;
