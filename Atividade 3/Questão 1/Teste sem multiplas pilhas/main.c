@@ -6,9 +6,10 @@ void enter() {
     getchar(); // Aguarda a entrada do usuário.
 }
 
-int menu(PilhaEnc *p){
+int menu(PilhaEnc pilha[], int *pilhaEscolhida){
     int opcao;
-    //p = &p1;
+    PilhaEnc *p = &pilha[*pilhaEscolhida];
+
     printf("\nEditor de Pilha v1.0");
     printf("\n====================");
     printf("\n1- Inicializar");
@@ -18,8 +19,10 @@ int menu(PilhaEnc *p){
     printf("\n5- Imprimir pilha");
     printf("\n6- Inverter elementos da pilha");
     printf("\n7- Esvaziar a pilha");
+    printf("\nPilha atual: %d",*pilhaEscolhida);
     //printf("\n8- Mudar de pilha");
     printf("\n\nDigite sua opção: ");
+
     scanf("%d",&opcao);
 
     if(opcao==1){
@@ -31,7 +34,7 @@ int menu(PilhaEnc *p){
         int dado;
         printf("\nDigite o dado a ser adicionado: ");
         scanf("%d",&dado);
-        if(empilhar(p,dado)==1){
+        if(empilhar(&p[*pilhaEscolhida],dado)==1){
             printf("\nDado empilhado com sucesso!");
         }
         else{
@@ -41,7 +44,7 @@ int menu(PilhaEnc *p){
 
     if(opcao==3){
         int desempilhado;
-        if(desempilhar(p, &desempilhado)==1){
+        if(desempilhar(&p[*pilhaEscolhida], &desempilhado)==1){
             printf("\nDado removido: %d",desempilhado);
         }
         else{
@@ -51,7 +54,7 @@ int menu(PilhaEnc *p){
     
     if(opcao==4){
         int t;
-        if(topo(*p, &t)==1){
+        if(topo(p[*pilhaEscolhida], &t)==1){
             printf("\nElemento no topo da pilha: %d",t);
         }
         else{
@@ -60,13 +63,13 @@ int menu(PilhaEnc *p){
     }
 
     if(opcao==5){
-        if(exibir(*p)==0){
+        if(exibir(p[*pilhaEscolhida])==0){
             printf("\nA pilha está vazia!");
         }
     }
 
     if(opcao==6){
-        if(invertePilha(p)==1){
+        if(invertePilha(&p[*pilhaEscolhida])==1){
             printf("\nPilha invertida com sucesso!");
         }
         else{
@@ -80,7 +83,7 @@ int menu(PilhaEnc *p){
         scanf("%d",&confirma);
 
         if(confirma==1){
-            if(esvaziar(p)==1){
+            if(esvaziar(&p[*pilhaEscolhida])==1){
                 printf("\nPilha esvaziada com sucesso!");
             }
             else{
@@ -92,14 +95,14 @@ int menu(PilhaEnc *p){
         }
     }
 
-    /*if(opcao==8){
-        if(mudaPilha(p,&p1,&p2,&p3)==1){
+    if(opcao==8){
+        if(mudaPilha(pilhaEscolhida)==1){
             printf("\nPilha trocada com sucesso!");
         }
         else{
             printf("\nOpção inválida!");
         }
-    }*/
+    }
 
     if(opcao==0){
         return 0;
@@ -113,14 +116,13 @@ int menu(PilhaEnc *p){
 }
 
 int main(){
-    PilhaEnc pteste;
-    PilhaEnc *pilhaE = &pteste;
-    
-    //criarPilha(&pilhaE);
 
-    int i = menu(pilhaE);
+    PilhaEnc vetorP[3];
+    int pE = 0;
+
+    int i = menu(vetorP, &pE);
     while(i == 1){
-        i = menu(pilhaE);
+        i = menu(vetorP, &pE);
     }
 
     return 0;

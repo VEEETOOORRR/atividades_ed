@@ -196,6 +196,7 @@ int prompt(ListaAluno *la){
             printf("\nFalha ao remover aluno.");
         }
         enter();
+        return 1;
     }
 
     if(opcao == 11){

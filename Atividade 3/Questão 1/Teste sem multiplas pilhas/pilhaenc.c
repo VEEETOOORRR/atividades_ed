@@ -94,17 +94,17 @@ int esvaziar(PilhaEnc *p){
 }
 
 
-int mudaPilha(PilhaEnc **p, PilhaEnc *p1, PilhaEnc *p2, PilhaEnc *p3) {
+int mudaPilha(int *qual) {
     int opcao;
     printf("\nDigite qual das três pilhas queres manipular: ");
     scanf("%d", &opcao);
 
-    if (opcao == 1) {
-        *p = p1;
+    if (opcao == 0) {
+        *qual = 0;
+    } else if (opcao == 1) {
+        *qual = 1;
     } else if (opcao == 2) {
-        *p = p2;
-    } else if (opcao == 3) {
-        *p = p3;
+        *qual = 2;
     } else {
         return 0; // Opção inválida
     }
