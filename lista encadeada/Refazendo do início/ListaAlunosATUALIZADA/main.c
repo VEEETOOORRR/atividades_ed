@@ -108,6 +108,7 @@ int prompt(ListaAluno *la){
             printf("\nA matrícula %d está na posição %d.", matricula, posi);
         }
         enter();
+        return 1;
     }
 
 
@@ -214,6 +215,7 @@ int prompt(ListaAluno *la){
 
     if(opcao >= 13 || opcao < 1){
         printf("\nOpção inválida");
+        enter();
         return 1;
     }
 
