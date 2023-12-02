@@ -19,8 +19,8 @@ int menu(PilhaEnc pilha[], int *pilhaEscolhida){
     printf("\n5- Imprimir pilha");
     printf("\n6- Inverter elementos da pilha");
     printf("\n7- Esvaziar a pilha");
+    printf("\n8- Mudar de pilha (0-2)");
     printf("\nPilha atual: %d",*pilhaEscolhida);
-    //printf("\n8- Mudar de pilha");
     printf("\n\nDigite sua opção: ");
 
     scanf("%d",&opcao);
